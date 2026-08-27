@@ -1,5 +1,6 @@
-import { AlertCircle, ArrowRight } from "lucide-react";
+import { AlertCircle } from "lucide-react";
 import type { Customer, Invoice } from "../../types";
+import ViewAllButton from "../ui/ViewAllButton";
 
 type OutstandingInvoicesProps = {
   invoices: Invoice[];
@@ -167,13 +168,7 @@ function OutstandingInvoices({
           </h2>
         </div>
 
-        <button
-          type="button"
-          className="flex shrink-0 items-center gap-1 text-sm font-medium text-white bg-brand-900 borderborder-brand-900 p-2 rounded-lg transition-colors hover:text-brand-900 hover:bg-white"
-        >
-          View all
-          <ArrowRight className="size-4" />
-        </button>
+        <ViewAllButton />
       </div>
 
       {/* Summary */}

@@ -4,6 +4,7 @@ import {
   getFinancialSummary,
   getInvoices,
   getMonthlyFinancials,
+  getTransactions,
 } from "../data/mockApi";
 import type {
   Customer,
@@ -16,6 +17,7 @@ import PageHeader from "../components/layout/PageHeader";
 import FinancialSummaryCard from "../components/dashboard/FinancialSummaryCard";
 import FinancialChart from "../components/dashboard/FinancialChart";
 import OutstandingInvoices from "../components/dashboard/OutstandingInvoices";
+import RecentTransactions from "../components/dashboard/RecentTransactions";
 
 function DashboardPage() {
   const [summary, setSummary] = useState<FinancialSummary | null>(null);
@@ -27,23 +29,32 @@ function DashboardPage() {
   const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [customers, setCustomers] = useState<Customer[]>([]);
 
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function loadDashboard() {
       try {
-        const [summaryData, monthlyData, invoiceData, customerData] =
-          await Promise.all([
-            getFinancialSummary(),
-            getMonthlyFinancials(),
-            getInvoices(),
-            getCustomers(),
-          ]);
+        const [
+          summaryData,
+          monthlyData,
+          invoiceData,
+          customerData,
+          transactionData,
+        ] = await Promise.all([
+          getFinancialSummary(),
+          getMonthlyFinancials(),
+          getInvoices(),
+          getCustomers(),
+          getTransactions(),
+        ]);
 
         setSummary(summaryData);
         setMonthlyFinancials(monthlyData);
         setInvoices(invoiceData);
         setCustomers(customerData);
+        setTransactions(transactionData);
       } finally {
         setIsLoading(false);
       }
@@ -69,8 +80,10 @@ function DashboardPage() {
         )}
 
         {!isLoading && (
-          <div className="mt-6">
+          <div className="mt-6 grid gap-6 lg:grid-cols-2">
             <OutstandingInvoices invoices={invoices} customers={customers} />
+
+            <RecentTransactions transactions={transactions} />
           </div>
         )}
       </div>
