@@ -7,7 +7,7 @@ import {
 } from "../data/mockApi";
 import type {
   Customer,
-  FinancialSummary as FinancialSummaryData,
+  FinancialSummary,
   Invoice,
   MonthlyFinancials,
 } from "../types";
