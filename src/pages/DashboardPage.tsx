@@ -6,12 +6,7 @@ import {
   getMonthlyFinancials,
   getTransactions,
 } from "../data/mockApi";
-import type {
-  Customer,
-  FinancialSummary,
-  Invoice,
-  MonthlyFinancials,
-} from "../types";
+import type { Customer, FinancialSummary, Invoice, MonthlyFinancials, Transaction, } from "../types";
 import PageContainer from "../components/layout/PageContainer";
 import PageHeader from "../components/layout/PageHeader";
 import FinancialSummaryCard from "../components/dashboard/FinancialSummaryCard";

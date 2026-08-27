@@ -1,16 +1,26 @@
 import { NavLink } from "react-router";
 import { primaryNavigation, secondaryNavigation } from "../../app/navigation";
 
-function NavigationSection({ items }: { items: typeof primaryNavigation }) {
+type SidebarProps = {
+  onNavigate?: () => void;
+};
+
+function NavigationSection({
+  items,
+  onNavigate,
+}: {
+  items: typeof primaryNavigation;
+  onNavigate?: () => void;
+}) {
   return (
     <nav className="space-y-1">
       {items.map((item) => {
         const Icon = item.icon;
-
         return (
           <NavLink
-            key={item.href}
+            key={item.label}
             to={item.href}
+            onClick={onNavigate}
             className={({ isActive }) =>
               [
                 "flex items-center gap-3 rounded-md px-3 py-2.5",
@@ -23,9 +33,9 @@ function NavigationSection({ items }: { items: typeof primaryNavigation }) {
               ].join(" ")
             }
           >
-            <Icon className="size-[18px] shrink-0" strokeWidth={1.8} />
-
-            <span>{item.label}</span>
+            {" "}
+            <Icon className="size-[18px] shrink-0" strokeWidth={1.8} />{" "}
+            <span>{item.label}</span>{" "}
           </NavLink>
         );
       })}
@@ -33,7 +43,7 @@ function NavigationSection({ items }: { items: typeof primaryNavigation }) {
   );
 }
 
-function Sidebar() {
+function Sidebar({ onNavigate }: SidebarProps) {
   return (
     <aside className="flex h-screen w-60 shrink-0 flex-col bg-brand-900 text-white">
       {/* Brand */}
@@ -56,11 +66,17 @@ function Sidebar() {
             Business
           </p>
 
-          <NavigationSection items={primaryNavigation} />
+          <NavigationSection
+            items={primaryNavigation}
+            onNavigate={onNavigate}
+          />
         </div>
 
         <div className="mt-auto">
-          <NavigationSection items={secondaryNavigation} />
+          <NavigationSection
+            items={secondaryNavigation}
+            onNavigate={onNavigate}
+          />
         </div>
       </div>
 
