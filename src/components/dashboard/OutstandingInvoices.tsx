@@ -32,7 +32,8 @@ function InvoiceRow({
   const isOverdue = invoice.status === "overdue";
 
   return (
-    <div className="flex items-center justify-between gap-4 py-4">
+    <div className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+      {/* Invoice information */}
       <div className="flex min-w-0 items-center gap-3">
         <div
           className={`flex size-8 shrink-0 items-center justify-center rounded-md text-xs font-semibold ${
@@ -53,13 +54,15 @@ function InvoiceRow({
         </div>
       </div>
 
-      <div className="flex shrink-0 flex-col items-end gap-1.5">
+      {/* Amount / status */}
+      <div className="flex flex-col items-start gap-1.5 pl-11 sm:items-end sm:pl-0">
         <p className="text-sm font-semibold text-text-primary">
           {formatCurrency(getInvoiceTotal(invoice))}
         </p>
-
         {isOverdue ? (
-          <span className="text-xs font-medium text-danger-600">Overdue</span>
+          <span className="rounded-full bg-danger-50 px-2 py-0.5 text-xs font-medium text-danger-700">
+            Overdue
+          </span>
         ) : (
           <span className="rounded-full bg-background px-2 py-0.5 text-[11px] font-medium text-text-secondary">
             Awaiting payment
@@ -95,10 +98,9 @@ function InvoiceSection({
 
   return (
     <div
-      className={isUrgent
-           ? "rounded-md border border-danger-50 bg-danger-50/30 p-4"
-           : ""
-       }
+      className={
+        isUrgent ? "rounded-md border border-danger-50 bg-danger-50/30 p-4" : ""
+      }
     >
       <div className="mb-2 flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -159,16 +161,17 @@ function OutstandingInvoices({
   );
 
   return (
-    <section className="rounded-lg border border-border/70 bg-surface p-6">
+    <section className="rounded-lg border border-border/70 bg-surface p-4 sm:p-6">
       {/* Header */}
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <div>
           <h2 className="text-lg font-semibold tracking-tight text-text-primary">
             Outstanding invoices
           </h2>
         </div>
-
-        <ViewAllButton />
+        <div className="self-start sm:self-auto">
+          <ViewAllButton />
+        </div>
       </div>
 
       {/* Summary */}
@@ -178,14 +181,14 @@ function OutstandingInvoices({
         </p>
 
         <p className="mt-1.5 text-sm text-text-secondary">
-          {outstandingInvoices.length}{" "}
-          {outstandingInvoices.length === 1 ? "invoice" : "invoices"}{" "}
+          {outstandingInvoices.length}
+          {outstandingInvoices.length === 1 ? "invoice" : "invoices"}
           outstanding
         </p>
       </div>
 
       {/* Invoice groups */}
-      <div className="mt-8 space-y-12">
+      <div className="mt-8 space-y-8 sm:space-y-12">
         <InvoiceSection
           label="Overdue"
           invoices={overdueInvoices}

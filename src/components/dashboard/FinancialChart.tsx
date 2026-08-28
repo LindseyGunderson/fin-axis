@@ -40,7 +40,7 @@ function FinancialChart({ data }: FinancialChartProps) {
 
   return (
     <section className="rounded-lg border border-border/70 bg-surface p-6">
-      <div className="mb-8 flex items-start justify-between gap-4">
+      <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row">
         <div>
           <h2 className="text-lg font-semibold tracking-tight text-text-primary">
             Revenue & Expenses
