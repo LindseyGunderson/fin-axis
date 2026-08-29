@@ -1,10 +1,21 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 
 function AppLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const sidebarRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+      if (isSidebarOpen) {
+        const firstFocusableElement =
+          sidebarRef.current?.querySelector<HTMLElement>(
+            "a[href], button:not([disabled])",
+          );
+        firstFocusableElement?.focus();
+      }
+  }, [isSidebarOpen]);
 
   const closeSidebar = () => {
     setIsSidebarOpen(false);
@@ -13,7 +24,10 @@ function AppLayout() {
   return (
     <div className="min-h-screen bg-background">
       {/* Desktop sidebar */}
-      <aside className="fixed inset-y-0 left-0 z-40 hidden w-60 lg:block">
+      <aside
+        className="fixed inset-y-0 left-0 z-40 hidden w-60 lg:block"
+        aria-label="Desktop navigation"
+      >
         <Sidebar />
       </aside>
 
@@ -29,7 +43,11 @@ function AppLayout() {
           />
 
           {/* Drawer */}
-          <aside className="fixed inset-y-0 left-0 z-50 w-60 lg:hidden">
+          <aside
+            ref={sidebarRef}
+            className="fixed inset-y-0 left-0 z-50 w-60 lg:hidden"
+            aria-label="Mobile navigation"
+          >
             <Sidebar onNavigate={closeSidebar} />
           </aside>
         </>

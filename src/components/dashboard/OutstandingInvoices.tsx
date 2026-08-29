@@ -104,11 +104,16 @@ function InvoiceSection({
     >
       <div className="mb-2 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          {isUrgent && <AlertCircle className="size-3.5 text-accent-coral" />}
+          {isUrgent && (
+            <AlertCircle
+              aria-hidden="true"
+              className="size-3.5 text-accent-coral"
+            />
+          )}
 
           <p
             className={`text-xs font-semibold uppercase tracking-wide ${
-              isUrgent ? "text-accent-coral" : "text-text-muted"
+              isUrgent ? "text-accent-coral-600" : "text-text-muted"
             }`}
           >
             {label}
@@ -119,7 +124,7 @@ function InvoiceSection({
 
         <p
           className={`text-xs font-medium ${
-            isUrgent ? "text-accent-coral" : "text-text-muted"
+            isUrgent ? "text-accent-coral-600" : "text-text-muted"
           }`}
         >
           {formatCurrency(total)}
@@ -201,11 +206,11 @@ function OutstandingInvoices({
           {formatCurrency(outstandingTotal)}
         </p>
 
-        <p className="mt-1.5 text-sm text-text-secondary">
-          {outstandingInvoices.length}
-          {outstandingInvoices.length === 1 ? "invoice" : "invoices"}
-          outstanding
-        </p>
+          <p className="mt-1.5 text-sm text-text-secondary">
+            {outstandingInvoices.length}{" "}
+            {outstandingInvoices.length === 1 ? "invoice" : "invoices"}{" "}
+            outstanding
+          </p>
       </div>
 
       {/* Invoice groups */}

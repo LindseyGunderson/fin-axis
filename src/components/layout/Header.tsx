@@ -14,7 +14,7 @@ function Header({ onMenuClick }: HeaderProps) {
         onClick={onMenuClick}
         className="inline-flex size-9 items-center justify-center rounded-md text-white/60 transition-colors hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 lg:hidden"
       >
-        <Menu className="size-5" strokeWidth={1.8} />
+        <Menu aria-hidden="true" className="size-5" strokeWidth={1.8} />
       </button>
 
       {/* Notifications */}
@@ -23,7 +23,7 @@ function Header({ onMenuClick }: HeaderProps) {
         aria-label="Notifications"
         className="relative ml-auto flex size-9 items-center justify-center rounded-md text-white/60 transition-colors hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
       >
-        <Bell className="size-[18px]" strokeWidth={1.8} />
+        <Bell aria-hidden="true" className="size-[18px]" strokeWidth={1.8} />
 
         <span
           aria-hidden="true"

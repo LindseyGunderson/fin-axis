@@ -69,12 +69,13 @@ function RecentTransactions({ transactions }: RecentTransactionsProps) {
                 {/* Transaction information */}
                 <div className="flex min-w-0 items-center gap-3">
                   <div
-                    className={`flex size-8 shrink-0 items-center justify-center rounded-md ${isIncome ? "bg-success-50 text-success-600" : "bg-accent-coral/10 text-accent-coral"}`}
+                    aria-hidden="true"
+                    className={`flex size-8 shrink-0 items-center justify-center rounded-md ${isIncome ? "bg-success-50 text-success-600" : "bg-accent-coral/10 text-accent-coral-600"}`}
                   >
                     {isIncome ? (
-                      <Plus className="size-4" />
+                      <Plus aria-hidden="true" className="size-4" />
                     ) : (
-                      <Minus className="size-4" />
+                      <Minus aria-hidden="true" className="size-4" />
                     )}
                   </div>
                   <div className="min-w-0">
@@ -88,7 +89,7 @@ function RecentTransactions({ transactions }: RecentTransactionsProps) {
                 </div>
                 {/* Amount */}
                 <p
-                  className={`pl-11 text-sm font-semibold sm:shrink-0 sm:pl-0 ${isIncome ? "text-success-600" : "text-accent-coral"}`}
+                  className={`pl-11 text-sm font-semibold sm:shrink-0 sm:pl-0 ${isIncome ? "text-success-600" : "text-accent-coral-600"}`}
                 >
                   {isIncome ? "+" : "-"}
                   {formatCurrency(transaction.amount)}

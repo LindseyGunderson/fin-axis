@@ -25,18 +25,44 @@ function formatCurrency(value: number) {
   }).format(value);
 }
 
-function FinancialChart({ data }: FinancialChartProps) {
+function getChartSummary(data: MonthlyFinancials[]) {
+  if (data.length === 0) {
+    return "No financial data is available for this period.";
+  }
 
+  const revenueValues = data.map((item) => item.revenue);
+  const expenseValues = data.map((item) => item.expenses);
+
+  const minRevenue = Math.min(...revenueValues);
+  const maxRevenue = Math.max(...revenueValues);
+
+  const minExpenses = Math.min(...expenseValues);
+  const maxExpenses = Math.max(...expenseValues);
+
+  const firstMonth = data[0].month;
+  const lastMonth = data[data.length - 1].month;
+
+  return `Revenue and expenses from ${firstMonth} through ${lastMonth}. Revenue ranged from ${formatCurrency(
+    minRevenue,
+  )} to ${formatCurrency(maxRevenue)}. Expenses ranged from ${formatCurrency(
+    minExpenses,
+  )} to ${formatCurrency(maxExpenses)}.`;
+}
+
+
+
+function FinancialChart({ data }: FinancialChartProps) {
   const [period, setPeriod] = useState<ChartPeriod>("6M");
-    const filteredData = useMemo(() => {
+
+  const filteredData = useMemo(() => {
     const months = {
-        "3M": 3,
-        "6M": 6,
-        "1Y": 12,
+      "3M": 3,
+      "6M": 6,
+      "1Y": 12,
     };
 
     return data.slice(-months[period]);
-    }, [data, period]);
+  }, [data, period]);
 
   return (
     <section className="rounded-lg border border-border/70 bg-surface p-6">
@@ -54,7 +80,7 @@ function FinancialChart({ data }: FinancialChartProps) {
         <div
           className="flex items-center rounded-full border border-border/70 bg-background px-2 py-1"
           role="group"
-          aria-label="Chart time period"
+          aria-label="Select chart time period"
         >
           {(["3M", "6M", "1Y"] as ChartPeriod[]).map((option) => {
             const isActive = period === option;
@@ -169,6 +195,8 @@ function FinancialChart({ data }: FinancialChartProps) {
           </LineChart>
         </ResponsiveContainer>
       </div>
+
+      <p className="sr-only"> {getChartSummary(filteredData)} </p>
     </section>
   );
 }
@@ -206,6 +234,7 @@ function FinancialTooltip({
                 style={{
                   backgroundColor: entry.color,
                 }}
+                aria-hidden="true"
               />
 
               <span className="text-xs text-white/65">{entry.name}</span>

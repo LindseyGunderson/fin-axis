@@ -12,12 +12,14 @@
 
   --color-text-primary: #171b24;
   --color-text-secondary: #596273;
-  --color-text-muted: #8a93a3;
+  --color-text-muted: #737c8c;
   --color-text-inverse: #ffffff;
 
   --color-border: #e1e5eb;
   --color-border-strong: #cdd3dc;
-  --color-accent-coral: #FE5F55;
+  
+  --color-accent-coral: #fe5f55;
+  --color-accent-coral-600: #c7443d;
 
 
   /* Brand */

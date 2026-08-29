@@ -39,28 +39,29 @@ function FinancialSummaryCard({ summary }: FinancialSummaryCardProps) {
   ];
 
   return (
-    <div className="grid gap-4 md:grid-cols-3">
+    <section aria-label="Financial summary" className="grid gap-4 md:grid-cols-3">
       {cards.map((card) => {
         const Icon = card.icon;
         const isPositive = card.change >= 0;
 
         return (
-          <div
+          <article
             key={card.label}
             className="rounded-lg border border-border/70 bg-surface px-6 py-6"
           >
-            {/* Label */}
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-text-secondary">
                 {card.label}
               </p>
 
-              <div className="flex size-8 items-center justify-center rounded-md bg-brand-50 text-brand-700">
+              <div
+                aria-hidden="true"
+                className="flex size-8 items-center justify-center rounded-md bg-brand-50 text-brand-700"
+              >
                 <Icon className="size-4" strokeWidth={1.8} />
               </div>
             </div>
 
-            {/* Value */}
             <p className="mt-6 text-3xl font-semibold tracking-tight text-text-primary">
               $
               {card.value.toLocaleString("en-CA", {
@@ -68,8 +69,6 @@ function FinancialSummaryCard({ summary }: FinancialSummaryCardProps) {
                 maximumFractionDigits: 2,
               })}
             </p>
-
-            {/* Change */}
             <div className="mt-5 flex items-center gap-1.5 text-xs">
               <span
                 className={
@@ -79,19 +78,31 @@ function FinancialSummaryCard({ summary }: FinancialSummaryCardProps) {
                 }
               >
                 {isPositive ? (
-                  <ArrowUpRight className="size-3.5" />
+                  <ArrowUpRight
+                    aria-hidden="true"
+                    className="size-3.5"
+                  />
                 ) : (
-                  <ArrowDownRight className="size-3.5" />
+                  <ArrowDownRight
+                    aria-hidden="true"
+                    className="size-3.5"
+                  />
                 )}
-                {Math.abs(card.change)}%
+
+                <span>
+                  <span className="sr-only">
+                    {isPositive ? "Increased" : "Decreased"}{" "}
+                  </span>
+                  {Math.abs(card.change)}%
+                </span>
               </span>
 
               <span className="text-text-muted">{card.description}</span>
             </div>
-          </div>
+          </article>
         );
       })}
-    </div>
+    </section>
   );
 }
 
