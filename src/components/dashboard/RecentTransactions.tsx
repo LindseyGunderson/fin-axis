@@ -41,15 +41,21 @@ function RecentTransactions({ transactions }: RecentTransactionsProps) {
 
       {/* Transactions */}
       <div className="mt-7">
-        <div className="mb-2 flex items-center justify-between">
-          <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">
-            Recent
-          </p>
+        {recentTransactions.length === 0 ? ( 
+            <div className="py-4">
+                <p className="text-sm font-medium text-text-primary"> No recent transactions.</p>
+                <p className="mt-1 text-sm text-text-secondary"> Transactions will appear here once activity is recorded. </p> 
+            </div> ) : ( 
+                <> 
+                    <div className="mb-2 flex items-center justify-between">
+                        <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">
+                            Recent
+                        </p>
 
-          <p className="hidden text-xs font-semibold uppercase tracking-wide text-text-muted sm:block">
-            Amount
-          </p>
-        </div>
+                        <p className="hidden text-xs font-semibold uppercase tracking-wide text-text-muted sm:block">
+                            Amount
+                        </p>
+                    </div>
 
         <div className="divide-y divide-border/70">
           {recentTransactions.map((transaction) => {
@@ -91,7 +97,10 @@ function RecentTransactions({ transactions }: RecentTransactionsProps) {
             );
           })}
         </div>
+        </>
+        )}
       </div>
+      
     </section>
   );
 }

@@ -13,6 +13,7 @@ import FinancialSummaryCard from "../components/dashboard/FinancialSummaryCard";
 import FinancialChart from "../components/dashboard/FinancialChart";
 import OutstandingInvoices from "../components/dashboard/OutstandingInvoices";
 import RecentTransactions from "../components/dashboard/RecentTransactions";
+import DashboardSkeleton from "../components/dashboard/DashboardSkeleton";
 
 function DashboardPage() {
   const [summary, setSummary] = useState<FinancialSummary | null>(null);
@@ -66,20 +67,22 @@ function DashboardPage() {
       />
 
       <div className="mt-8 max-w-5xl">
-        {!isLoading && summary && <FinancialSummaryCard summary={summary} />}
+        {isLoading ? (
+          <DashboardSkeleton />
+        ) : (
+          <>
+            {summary && <FinancialSummaryCard summary={summary} />}
 
-        {!isLoading && (
-          <div className="mt-6">
-            <FinancialChart data={monthlyFinancials} />
-          </div>
-        )}
+            <div className="mt-6">
+              <FinancialChart data={monthlyFinancials} />
+            </div>
 
-        {!isLoading && (
-          <div className="mt-6 grid gap-6 lg:grid-cols-2">
-            <OutstandingInvoices invoices={invoices} customers={customers} />
+            <div className="mt-6 grid gap-6 lg:grid-cols-2">
+              <OutstandingInvoices invoices={invoices} customers={customers} />
 
-            <RecentTransactions transactions={transactions} />
-          </div>
+              <RecentTransactions transactions={transactions} />
+            </div>
+          </>
         )}
       </div>
     </PageContainer>

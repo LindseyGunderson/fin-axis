@@ -160,6 +160,27 @@ function OutstandingInvoices({
     0,
   );
 
+  if (outstandingInvoices.length === 0) {
+    return (
+      <section className="rounded-lg border border-border/70 bg-surface p-6">
+        <div className="flex items-start justify-between gap-4">
+          <h2 className="text-lg font-semibold tracking-tight text-text-primary">
+            Outstanding invoices
+          </h2>
+          <ViewAllButton />
+        </div>
+        <div className="mt-8 py-4">
+          <p className="text-sm font-medium text-text-primary">
+            You're all caught up.
+          </p>
+          <p className="mt-1 text-sm text-text-secondary">
+            There are no outstanding invoices right now.
+          </p>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="rounded-lg border border-border/70 bg-surface p-4 sm:p-6">
       {/* Header */}
