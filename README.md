@@ -1,75 +1,73 @@
-# React + TypeScript + Vite
+# Fin Axis
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern financial dashboard built with React and TypeScript, focused on clear information hierarchy, responsive design, and a polished user experience.
 
-Currently, two official plugins are available:
+> **Status:** In progress
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## About
 
-## React Compiler
+Fin Axis is a portfolio project exploring the design and development of a small business financial dashboard. The goal is to build a realistic product experience rather than simply a collection of UI components.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The dashboard currently includes:
 
-## Expanding the ESLint configuration
+* Financial overview cards
+* Revenue and expense chart with 3M, 6M, and 1Y views
+* Outstanding invoice summary
+* Recent transactions
+* Responsive sidebar navigation
+* Mobile and tablet navigation
+* Mock financial data and API layer
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The project is being developed incrementally, with a focus on maintainable React patterns, reusable components, responsive layouts, and accessible UI.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+* React
+* TypeScript
+* Vite
+* Tailwind CSS
+* React Router
+* Lucide React
+* Mock API / local data
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project Goals
 
+This project is being built to explore:
+
+* Building a realistic dashboard from product requirements
+* Creating reusable UI patterns without over-engineering
+* Responsive design across desktop, tablet, and mobile
+* Clear financial data visualization
+* Component composition and maintainable React architecture
+* Accessible interactions and navigation
+* Working with typed data and a mock API layer
+
+## Development
+
+Clone the repository and install dependencies:
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Start the development server:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm run dev
 ```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+## Project Status
+
+Fin Axis is an active work in progress. The dashboard and core layout are currently being developed, with additional pages, functionality, and refinements planned.
+
+More features and improvements will be added as development continues.
+
+## Preview
+
+WIP
